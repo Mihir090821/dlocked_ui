@@ -6,6 +6,7 @@ import { Google as GoogleIcon, Visibility, VisibilityOff } from '@mui/icons-mate
 import { useAuth } from '../../utils/hooks/useAuth';
 import { useTheme } from '../../utils/hooks/useTheme';
 import loginIllustration from '../../assets/images/login/login.png';
+import { PROJECT_NAME } from '../../utils/globals/KRM_GLOBAL_VARIABLES';
 
 // Validation Schema
 const validationSchema = Yup.object({
@@ -97,7 +98,7 @@ const Register = () => {
 
   return (
     <div className="auth-container">
-      <div className="auth-brand">project(z)</div>
+      <div className="auth-brand">{PROJECT_NAME}</div>
       
       <div className="auth-card">
         <div className="auth-illustration">

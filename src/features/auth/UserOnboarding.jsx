@@ -6,6 +6,7 @@ import { CloudUpload as UploadIcon } from '@mui/icons-material';
 import { useAuth } from '../../utils/hooks/useAuth';
 import { useTheme } from '../../utils/hooks/useTheme';
 import onboardingIllustration from '../../assets/images/login/onboarding.png'; // You'll need this image
+import { PROJECT_NAME } from '../../utils/globals/KRM_GLOBAL_VARIABLES';
 
 // Validation Schema
 const validationSchema = Yup.object({
@@ -108,7 +109,7 @@ const UserOnboarding = () => {
 
   return (
     <div className="auth-container">
-      <div className="auth-brand">project(z)</div>
+      <div className="auth-brand">{PROJECT_NAME}</div>
       
       <div className="auth-card">
         <div className="auth-illustration">
