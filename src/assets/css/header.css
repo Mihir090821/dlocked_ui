@@ -106,7 +106,7 @@
 }
 
 /* When input is focused, style the button too */
-.search-input:focus+.search-btn {
+.search-input:focus + .search-btn {
   border-color: var(--input-border-focus);
   box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.1);
 }
@@ -146,7 +146,7 @@
 
 /* Create Community Button */
 .create-community-btn {
-  background: #481FFF;
+  background: #481fff;
   color: #ffffff;
   border: none;
   padding: 10px 20px;
@@ -162,7 +162,7 @@
 }
 
 .create-community-btn:hover {
-  background: #542efc;
+  background: #6c4fff;
 }
 
 /* User Menu */
@@ -181,7 +181,8 @@
   aspect-ratio: 1/1;
   border: 1px solid var(--divider-color);
   border-radius: var(--Spacing-Corner-Radius-200, 0.5rem);
-  background: url(<path-to-image>) lightgray 50% / cover no-repeat, var(--Color-Primary-200, #B6A5FF);
+  background: url(<path-to-image>) lightgray 50% / cover no-repeat,
+    var(--Color-Primary-200, #b6a5ff);
   transition: border-color 0.2s ease;
 }
 
