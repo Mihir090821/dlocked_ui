@@ -5,7 +5,7 @@ import OpportunityCard from '../../utils/components/Commen/OpportunityCard';
 import SectionHeader from '../../utils/components/Commen/SectionHeader';
 
 
-
+import profileImage from '../../../assets/images/user/user.png';
 
 const Dashboard = () => {
   const trendingCommunities = [

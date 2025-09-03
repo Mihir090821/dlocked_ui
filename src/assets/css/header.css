@@ -146,8 +146,8 @@
 
 /* Create Community Button */
 .create-community-btn {
-  background: var(--btn-google-bg);
-  color: var(--btn-google-text);
+  background: #481FFF;
+  color: #ffffff;
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
@@ -162,7 +162,7 @@
 }
 
 .create-community-btn:hover {
-  background: var(--btn-google-hover);
+  background: #542efc;
 }
 
 /* User Menu */
