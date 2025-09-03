@@ -39,38 +39,30 @@ const Register = () => {
   const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
     try {
       if (error) clearError();
-      
-        navigate('/verify-email', { 
-          state: { email: values.email }
-        });
 
-          navigate('/verify-email', { 
-          state: { email: values.email }
-        });
+      navigate('/verify-email', {
+        state: { email: values.email }
+      });
 
-
-    //   // Remove confirmPassword from the data sent to the server
-    //   const { confirmPassword, ...registrationData } = values;
-      
-    //   const result = await register(registrationData);
-      
-    //   if (result.success) {
-    //     // Store email for OTP verification
-    //     localStorage.setItem('verificationEmail', values.email);
-    //     // Navigate to OTP verification
-    //     navigate('/verify-email', { 
-    //       state: { email: values.email }
-    //     });
-
-    //           setSubmitting(false);
-    //   } else {
-    //     // Handle specific field errors if needed
-    //     if (result.fieldErrors) {
-    //       Object.keys(result.fieldErrors).forEach(field => {
-    //         setFieldError(field, result.fieldErrors[field]);
-    //       });
-    //     }
-    //   }
+      //   // Remove confirmPassword from the data sent to the server
+      //   const { confirmPassword, ...registrationData } = values;
+      //   const result = await register(registrationData);
+      //   if (result.success) {
+      //     // Store email for OTP verification
+      //     localStorage.setItem('verificationEmail', values.email);
+      //     // Navigate to OTP verification
+      //     navigate('/verify-email', { 
+      //       state: { email: values.email }
+      //     });
+      //           setSubmitting(false);
+      //   } else {
+      //     // Handle specific field errors if needed
+      //     if (result.fieldErrors) {
+      //       Object.keys(result.fieldErrors).forEach(field => {
+      //         setFieldError(field, result.fieldErrors[field]);
+      //       });
+      //     }
+      //   }
     } catch (err) {
       console.error('Registration error:', err);
     } finally {
@@ -99,20 +91,19 @@ const Register = () => {
   return (
     <div className="auth-container">
       <div className="auth-brand">{PROJECT_NAME}</div>
-      
+
       <div className="auth-card">
         <div className="auth-illustration">
           <div className="auth-illustration-gradient">
-            <img src={loginIllustration} alt="Team Illustration" />
+            <img className="auth-illustration-img" src={loginIllustration} alt="Team Illustration" />
           </div>
         </div>
 
         <div className="auth-form-section">
           <div className="auth-header">
             <h1 className="auth-title">
-              Join project<span className="highlight">(z)</span>
+              Sign up for project<span className="highlight">(z)</span>
             </h1>
-            <p className="auth-subtitle">Create your account to get started</p>
           </div>
 
           {error && (
@@ -128,6 +119,20 @@ const Register = () => {
           >
             {({ isSubmitting, touched, errors, values, handleChange, handleBlur }) => (
               <Form className="auth-form">
+                <button
+                  type="button"
+                  className="auth-btn-google"
+                  onClick={handleGoogleSignUp}
+                  disabled={isLoading || isSubmitting}
+                >
+                  <GoogleIcon className="google-icon" />
+                  Continue with Google
+                </button>
+
+                <div className="auth-divider">
+                  <span>OR</span>
+                </div>
+
                 <div className="auth-field">
                   <label htmlFor="email">Email</label>
                   <Field
@@ -210,36 +215,31 @@ const Register = () => {
                   <ErrorMessage name="confirmPassword" component="div" className="auth-field-error" />
                 </div>
 
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="auth-btn-signin"
                   disabled={isLoading || isSubmitting}
                 >
                   {(isLoading || isSubmitting) ? 'Creating Account...' : 'Create Account'}
                 </button>
 
-                <div className="auth-divider">
-                  <span>OR</span>
-                </div>
-
-                <button 
-                  type="button" 
-                  className="auth-btn-google" 
-                  onClick={handleGoogleSignUp}
-                  disabled={isLoading || isSubmitting}
-                >
-                  <GoogleIcon className="google-icon" />
-                  Continue with Google
-                </button>
-
                 <div className="auth-footer">
                   Already have an account?{' '}
-                  <span 
+                  <span
                     className="auth-footer-link"
                     onClick={() => navigate('/login')}
                   >
                     Sign in
                   </span>
+                </div>
+
+                {/* Terms and Privacy Policy Disclaimer */}
+                <div className="auth-terms">
+                  By creating an account, you agree to the{' '}
+                  <span className="auth-terms-link">Terms of Service</span>
+                  {' '}and{' '}
+                  <span className="auth-terms-link">Privacy Policy</span>
+                  {' '}of project<span className="highlight">(z)</span>.
                 </div>
               </Form>
             )}

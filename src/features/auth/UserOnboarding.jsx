@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { CloudUpload as UploadIcon } from '@mui/icons-material';
+// import { ReactComponent as UploadIcon } from "../../assets/images/login/upload.svg";
 import { useAuth } from '../../utils/hooks/useAuth';
 import { useTheme } from '../../utils/hooks/useTheme';
 import onboardingIllustration from '../../assets/images/login/onboarding.png'; // You'll need this image
@@ -41,7 +42,7 @@ const UserOnboarding = () => {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
-    
+
     // Check if user is coming from email verification
     // const userEmail = location.state?.email || localStorage.getItem('verificationEmail');
     // if (!userEmail) {
@@ -53,18 +54,18 @@ const UserOnboarding = () => {
   const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
     try {
       if (error) clearError();
-      
+
       // Create FormData for file upload
       const formData = new FormData();
       formData.append('name', values.name);
       formData.append('username', values.username);
-      
+
       if (values.profileImage) {
         formData.append('profileImage', values.profileImage);
       }
-      
+
       const result = await updateProfile(formData);
-      
+
       if (result.success) {
         // Clear stored email and redirect to dashboard
         localStorage.removeItem('verificationEmail');
@@ -87,7 +88,7 @@ const UserOnboarding = () => {
     const file = event.target.files[0];
     if (file) {
       setFieldValue('profileImage', file);
-      
+
       // Create image preview
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -110,7 +111,7 @@ const UserOnboarding = () => {
   return (
     <div className="auth-container">
       <div className="auth-brand">{PROJECT_NAME}</div>
-      
+
       <div className="auth-card">
         <div className="auth-illustration">
           <div className="auth-illustration-gradient">
@@ -139,7 +140,7 @@ const UserOnboarding = () => {
                 {/* Image Upload */}
                 <div className="auth-field">
                   <label>Upload Image</label>
-                  <div 
+                  <div
                     className={`auth-upload-area ${touched.profileImage && errors.profileImage ? 'auth-upload-error' : ''}`}
                     onClick={triggerFileUpload}
                   >
@@ -192,15 +193,15 @@ const UserOnboarding = () => {
                       // Convert to lowercase and remove spaces
                       const value = e.target.value.toLowerCase().replace(/\s/g, '');
                       setFieldValue('username', value);
-                      
+
                       if (error) clearError();
                     }}
                   />
                   <ErrorMessage name="username" component="div" className="auth-field-error" />
                 </div>
 
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="auth-btn-signin"
                   disabled={isLoading || isSubmitting}
                 >
