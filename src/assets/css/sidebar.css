@@ -1,0 +1,287 @@
+/* Sidebar - Navigation Menu */
+
+.sidebar {
+  width: 280px;
+  background-color: var(--card-bg);
+  /* border-right: 1px solid var(--divider-color); */
+  height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  overflow: hidden;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  z-index: 1000;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+/* Navigation Container */
+.sidebar-nav {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px 10px 10px;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Navigation Sections */
+.nav-section {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  /* Prevent shrinking */
+}
+
+.nav-section.main-navigation {
+  /* margin-bottom: 10px; */
+  /* border-bottom: 1px solid var(--divider-color); */
+  padding-bottom: 15px;
+}
+
+/* Scrollable Communities Container */
+.communities-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 5px;
+  /* Space for scrollbar */
+  margin-right: -5px;
+  /* Offset padding to align with other elements */
+}
+
+/* Custom Scrollbar for Communities Container */
+.communities-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.communities-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.communities-container::-webkit-scrollbar-thumb {
+  background: var(--divider-color);
+  border-radius: 2px;
+}
+
+.communities-container::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Navigation Items */
+.nav-item {
+  background: transparent;
+  border: 1px solid transparent;
+  outline: none;
+  cursor: pointer;
+  padding: 12px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  user-select: none;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+  justify-content: flex-start;
+}
+
+.sidebar.collapsed .nav-item {
+  justify-content: center;
+  padding: 10px;
+}
+
+.nav-item:hover {
+  background-color: rgba(108, 92, 231, 0.1);
+  border-color: rgba(108, 92, 231, 0.3);
+  transform: translateY(-1px);
+}
+
+.nav-item.active {
+  background-color: var(--btn-google-bg);
+  color: var(--btn-google-text);
+  font-weight: 600;
+  border-color: var(--btn-google-bg);
+  box-shadow: 0 2px 8px rgba(108, 92, 231, 0.2);
+}
+
+/* Navigation Icons */
+.nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  min-width: 24px;
+  color: inherit;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* Rotation for collapse icon */
+.nav-icon .rotated {
+  transform: rotate(180deg);
+}
+
+/* Navigation Labels */
+.nav-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: inherit;
+  transition: opacity 0.2s ease;
+  flex: 1;
+}
+
+.sidebar.collapsed .nav-label {
+  opacity: 0;
+  width: 0;
+}
+
+/* Section Headers */
+.nav-section .section-header {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  padding-left: 12px;
+  padding-top: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Community Items */
+.community-item {
+  position: relative;
+}
+
+.community-avatar {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease;
+  /* flex-shrink: 0; */
+}
+
+.sidebar.collapsed .community-avatar {
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.community-item:hover .community-avatar {
+  transform: scale(1.05);
+}
+
+/* Community Separator for Collapsed State */
+.sidebar.collapsed .community-separator {
+  width: 24px;
+  height: 1px;
+  background-color: var(--divider-color);
+  margin: 8px auto;
+  flex-shrink: 0;
+}
+
+/* Tooltips for collapsed state */
+.sidebar.collapsed .nav-item {
+  position: relative;
+}
+
+.sidebar.collapsed .nav-item:hover::after {
+  content: attr(title);
+  position: absolute;
+  left: 88px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--card-bg);
+  border: 1px solid var(--divider-color);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1000;
+  box-shadow: 0 4px 12px var(--card-shadow);
+  opacity: 0;
+  animation: fadeIn 0.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 260px;
+    top: 56px;
+    height: calc(100vh - 56px);
+  }
+
+  .sidebar.collapsed {
+    width: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    width: 100%;
+    height: calc(100vh - 56px);
+    top: 56px;
+    border-right: none;
+    border-bottom: 1px solid var(--divider-color);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar.collapsed {
+    width: 100%;
+  }
+
+  .sidebar-nav {
+    padding: 15px;
+  }
+
+  .nav-section {
+    margin-bottom: 20px;
+  }
+}
+
+/* Theme Adjustments */
+[data-theme="dark"] .sidebar {
+  backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .nav-item:hover {
+  background-color: rgba(108, 92, 231, 0.15);
+}
+
+[data-theme="dark"] .community-avatar {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .sidebar {
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+}

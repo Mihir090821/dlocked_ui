@@ -13,7 +13,7 @@ const UserAvatar = ({ src, alt, size = 'medium', className = '' }) => {
         src={src} 
         alt={alt}
         onError={(e) => {
-          e.target.src = 'https://via.placeholder.com/40/6c5ce7/white?text=U';
+          // e.target.src = 'https://via.placeholder.com/40/6c5ce7/white?text=U';
         }}
       />
     </div>

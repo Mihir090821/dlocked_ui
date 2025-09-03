@@ -5,6 +5,10 @@ import { ReduxThemeProvider } from './utils/theme/ReduxThemeProvider';
 import AppLoader from './utils/components/Loaders/AppLoader';
 import AppRouter from './AppRouter';
 import "./assets/css/custom.css";
+import "./assets/css/sidebar.css";
+import "./assets/css/header.css";
+import "./assets/css/appLayout.css";
+import "./assets/css/dashboard.css";
 
 
 function App() {

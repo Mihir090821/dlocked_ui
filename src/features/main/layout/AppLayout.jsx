@@ -14,11 +14,21 @@ const AppLayout = () => {
 
   return (
     <div className={`app-layout ${isDarkMode ? 'dark' : 'light'}`} data-theme={isDarkMode ? 'dark' : 'light'}>
-      <Sidebar collapsed={sidebarCollapsed} />
-      <div className={`app-main ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
-        <Header onToggleSidebar={toggleSidebar} />
-        <main className="app-content">
-          <Outlet />
+      {/* Header spans full width - above sidebar */}
+      <Header 
+        onToggleSidebar={toggleSidebar} 
+        sidebarCollapsed={sidebarCollapsed}
+      />
+      
+      <div className="app-body">  
+        <Sidebar 
+          collapsed={sidebarCollapsed} 
+          onToggleCollapse={toggleSidebar}
+        />
+        <main className={`app-content ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
+          <div className="content-wrapper">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>

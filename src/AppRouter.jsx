@@ -33,9 +33,9 @@ const AppRouter = () => {
             isAuthenticated ? (
               <Navigate to="/dashboard" replace />
             ) : (
-    
-               <Login />
-           
+
+              <Login />
+
             )
           }
         />
@@ -45,17 +45,17 @@ const AppRouter = () => {
             isAuthenticated ? (
               <Navigate to="/dashboard" replace />
             ) : (
-                <Register />
+              <Register />
             )
           }
         />
 
-    
+
         <Route
           path="/verify-email"
           element={
             // <ProtectedRoute requireOnboarding={false}>
-                <OTPVerification />
+            <OTPVerification />
             // </ProtectedRoute>
           }
         />
@@ -63,13 +63,18 @@ const AppRouter = () => {
           path="/onboarding"
           element={
             // <ProtectedRoute requireOnboarding={false}>
-                <UserOnboarding />
+            <UserOnboarding />
             // </ProtectedRoute>
           }
         />
 
         {/* Protected App Routes */}
-        <Route
+        <Route element={<AppLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/chats" element={<Chats />} />
+          <Route path="/chats/:chatId" element={<Chats />} />
+        </Route>
+        {/* <Route
           path="/dashboard"
           element={
             // <ProtectedRoute>
@@ -78,7 +83,7 @@ const AppRouter = () => {
               </AppLayout>
             // </ProtectedRoute>
           }
-        />
+        /> */}
         <Route
           path="/chats"
           element={

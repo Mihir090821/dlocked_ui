@@ -1,0 +1,301 @@
+/* Header - Exact Client Design with External Search Icon */
+
+.app-header {
+  height: 64px;
+  background-color: var(--card-bg);
+  /* border-bottom: 1px solid var(--divider-color); */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+  backdrop-filter: blur(10px);
+  width: 100%;
+}
+
+/* Header Left - Only Brand Logo */
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.brand-logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+.brand-highlight {
+  background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Header Right - All Other Elements */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Search Container - Input with External Button */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  /* No gap between input and button */
+}
+
+.search-input {
+  width: 400px;
+  height: 40px;
+  padding: 0 16px;
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  /* border-right: none; Remove right border to connect with button */
+  border-radius: 8px;
+  /* Only left side rounded */
+  font-size: 14px;
+  color: var(--input-text);
+  transition: all 0.2s ease;
+  font-family: inherit;
+  font-weight: 400;
+}
+
+.search-input::placeholder {
+  color: var(--input-placeholder);
+  font-weight: 400;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--input-border-focus);
+  background-color: var(--card-bg);
+  box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.1);
+}
+
+.search-btn {
+  height: 40px;
+  width: 40px;
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  /* border-left: none; Remove left border to connect with input */
+  border-radius: 8px;
+  /* Only right side rounded */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-muted);
+}
+
+.search-btn:hover {
+  background-color: var(--btn-google-bg);
+  color: white;
+}
+
+.search-btn svg {
+  font-size: 18px;
+}
+
+/* When input is focused, style the button too */
+.search-input:focus+.search-btn {
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.1);
+}
+
+/* Vertical Separator Line */
+.header-separator {
+  width: 1px;
+  height: 24px;
+  background-color: var(--divider-color);
+  flex-shrink: 0;
+}
+
+/* Notification Button */
+.notification-btn {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid var(--divider-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.notification-btn:hover {
+  background: var(--input-bg);
+  border-color: var(--input-border-focus);
+}
+
+.notification-btn svg {
+  font-size: 18px;
+}
+
+/* Create Community Button */
+.create-community-btn {
+  background: var(--btn-google-bg);
+  color: var(--btn-google-text);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  font-family: inherit;
+  letter-spacing: 0.2px;
+  flex-shrink: 0;
+}
+
+.create-community-btn:hover {
+  background: var(--btn-google-hover);
+}
+
+/* User Menu */
+.user-menu {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-menu img {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  aspect-ratio: 1/1;
+  border: 1px solid var(--divider-color);
+  border-radius: var(--Spacing-Corner-Radius-200, 0.5rem);
+  background: url(<path-to-image>) lightgray 50% / cover no-repeat, var(--Color-Primary-200, #B6A5FF);
+  transition: border-color 0.2s ease;
+}
+
+.user-menu img:hover {
+  border-color: var(--btn-google-bg);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .search-input {
+    width: 350px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .app-header {
+    padding: 0 20px;
+  }
+
+  .search-input {
+    width: 300px;
+  }
+
+  .header-right {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    height: 56px;
+    padding: 0 16px;
+  }
+
+  .brand-logo {
+    font-size: 20px;
+  }
+
+  .search-input {
+    width: 250px;
+    height: 36px;
+    font-size: 13px;
+  }
+
+  .search-btn {
+    height: 36px;
+    width: 36px;
+  }
+
+  .search-btn svg {
+    font-size: 16px;
+  }
+
+  .notification-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .notification-btn svg {
+    font-size: 16px;
+  }
+
+  .create-community-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .user-menu img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .header-right {
+    gap: 10px;
+  }
+
+  .header-separator {
+    height: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .search-input {
+    width: 200px;
+  }
+
+  .create-community-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-input {
+    width: 150px;
+  }
+
+  .search-input::placeholder {
+    font-size: 12px;
+  }
+
+  .header-right {
+    gap: 8px;
+  }
+
+  .header-separator {
+    height: 18px;
+  }
+}
+
+/* Focus states */
+.search-input:focus-visible,
+.search-btn:focus-visible,
+.notification-btn:focus-visible,
+.create-community-btn:focus-visible {
+  outline: 2px solid var(--btn-google-bg);
+  outline-offset: 1px;
+}

@@ -1,11 +1,12 @@
 import React from 'react';
-import { 
-  Search as SearchIcon, 
+import {
+  Search as SearchIcon,
   Notifications as NotificationsIcon,
-  Person as PersonIcon
 } from '@mui/icons-material';
 import { useAuth } from '../../../utils/hooks/useAuth';
 import UserAvatar from '../../../utils/components/Commen/UserAvatar';
+
+import profileImage from '../../../assets/images/user/user.png';
 
 
 const Header = ({ onToggleSidebar }) => {
@@ -13,38 +14,41 @@ const Header = ({ onToggleSidebar }) => {
 
   return (
     <header className="app-header">
+      {/* Left Side - Only Logo */}
       <div className="header-left">
         <div className="brand-logo">
           project<span className="brand-highlight">(z)</span>
         </div>
       </div>
-      
-      <div className="header-center">
+
+      {/* Right Side - Search with External Icon, Separator, Other Elements */}
+      <div className="header-right">
         <div className="search-container">
-          <SearchIcon className="search-icon" />
           <input
             type="text"
             placeholder="Search for communities and opportunities"
             className="search-input"
           />
-          <button className="search-button">
-            <SearchIcon />
-          </button>
         </div>
-      </div>
 
-      <div className="header-right">
+        <button className="search-btn">
+          <SearchIcon />
+        </button>
+
+        {/* Vertical Separator Line */}
+        <div className="header-separator"></div>
+
         <button className="notification-btn">
           <NotificationsIcon />
         </button>
-        
+
         <button className="create-community-btn">
-          Create Community
+          New Community
         </button>
 
         <div className="user-menu">
-          <UserAvatar 
-            src={user?.profileImage || 'https://via.placeholder.com/40/6c5ce7/white?text=U'}
+          <UserAvatar
+            src={user?.profileImage || profileImage}
             alt={user?.name || 'User'}
             size="medium"
           />
