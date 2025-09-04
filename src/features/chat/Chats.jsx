@@ -1,6 +1,10 @@
+// components/Chats.jsx
 import React, { useState } from 'react';
 import '../../assets/css/chats.css';
 import SearchBar from '../../utils/components/Commen/Search';
+import ConversationItem from './ConversationItem';
+import MessageBubble from './MessageBubble';
+import MessageInput from './MessageInput';
 
 const Chats = () => {
   const [selectedChat, setSelectedChat] = useState('David Brown');
@@ -21,49 +25,9 @@ const Chats = () => {
       initials: 'DB',
       lastMessage: "What's your plan for the night?",
       time: '5:30 PM',
-      bgColor: '#10B981',
-      active: true
+      bgColor: '#10B981'
     },
-    {
-      id: 3,
-      name: 'James Wilson',
-      initials: 'JW',
-      lastMessage: 'Do you have any activities planned fo...',
-      time: '2:00 PM',
-      bgColor: '#F59E0B'
-    },
-    {
-      id: 4,
-      name: 'Emily Carter',
-      initials: 'EC',
-      lastMessage: 'Are you doing anything fun tonight?',
-      time: '10:15 AM',
-      bgColor: '#EF4444'
-    },
-    {
-      id: 5,
-      name: 'John Smith',
-      initials: 'JS',
-      lastMessage: 'What are you up to later?',
-      time: 'Yesterday',
-      bgColor: '#6366F1'
-    },
-    {
-      id: 6,
-      name: 'Michael Johnson',
-      initials: 'MJ',
-      lastMessage: 'Any exciting plans for this evening?',
-      time: '15 Aug',
-      bgColor: '#8B5CF6'
-    },
-    {
-      id: 7,
-      name: 'Sophia Johnson',
-      initials: 'SJ',
-      lastMessage: "What's on your mind for this evening?",
-      time: '12 Aug',
-      bgColor: '#EC4899'
-    }
+    // ... rest of conversations
   ];
 
   const messages = [
@@ -120,12 +84,9 @@ const Chats = () => {
     }
   ];
 
-  const handleSendMessage = (e) => {
-    e.preventDefault();
-    if (newMessage.trim()) {
-      // Handle message sending logic here
-      setNewMessage('');
-    }
+  const handleSendMessage = (message) => {
+    // Handle message sending logic here
+    console.log('Sending message:', message);
   };
 
   return (
@@ -134,30 +95,17 @@ const Chats = () => {
       <div className="chat-sidebar">
         <div className="sidebar-header">
           <h2 className="sidebar-title">Messages</h2>
-          <SearchBar  placeholder="Search for new conversations"/>  
+          <SearchBar placeholder="Search for new conversations" />
         </div>
-        
+
         <div className="conversations-list">
           {conversations.map((conv) => (
-            <div 
-              key={conv.id} 
-              className={`conversation-item ${conv.active ? 'active' : ''}`}
-              onClick={() => setSelectedChat(conv.name)}
-            >
-              <div 
-                className="avatar" 
-                style={{ backgroundColor: conv.bgColor }}
-              >
-                {conv.initials}
-              </div>
-              <div className="conversation-content">
-                <div className="conversation-header">
-                  <span className="conversation-name">{conv.name}</span>
-                  <span className="conversation-time">{conv.time}</span>
-                </div>
-                <p className="last-message">{conv.lastMessage}</p>
-              </div>
-            </div>
+            <ConversationItem
+              key={conv.id}
+              conversation={conv}
+              isSelected={selectedChat === conv.name}
+              onClick={setSelectedChat}
+            />
           ))}
         </div>
       </div>
@@ -167,84 +115,31 @@ const Chats = () => {
         <div className="chat-header">
           <div className="chat-user-info">
             <div className="chat-avatar">
-              <img src="/api/placeholder/40/40" alt="David Brown" />
+              <img src="/src/assets/images/login/user.jpg" alt="David Brown" />
             </div>
-            <span className="chat-user-name">David Brown</span>
+            <span className="chat-user-name">{selectedChat}</span>
           </div>
         </div>
 
         <div className="messages-container">
           {messages.map((message, index) => {
             const showDate = message.date && (index === 0 || messages[index - 1].date !== message.date);
-            
+
             return (
-              <React.Fragment key={message.id}>
-                {showDate && (
-                  <div className="date-divider">
-                    <span>{message.date}</span>
-                  </div>
-                )}
-                <div className={`message ${message.isMe ? 'message-sent' : 'message-received'}`}>
-                  {!message.isMe && (
-                    <div className="message-avatar">
-                      <img src="/api/placeholder/32/32" alt={message.sender} />
-                    </div>
-                  )}
-                  <div className="message-content">
-                    <div className="message-bubble">
-                      <p>{message.content}</p>
-                    </div>
-                    <div className="message-info">
-                      <span className="message-sender">{message.isMe ? 'You' : message.sender}</span>
-                      <span className="message-time">{message.time}</span>
-                    </div>
-                  </div>
-                </div>
-              </React.Fragment>
+              <MessageBubble
+                key={message.id}
+                message={message}
+                showDate={showDate}
+              />
             );
           })}
-          
-          {/* Today divider */}
-          <div className="date-divider">
-            <span>Today</span>
-          </div>
-          <div className="message message-received">
-            <div className="message-avatar">
-              <img src="/api/placeholder/32/32" alt="David Brown" />
-            </div>
-            <div className="message-content">
-              <div className="message-bubble">
-                <p>What's your plan for the night?</p>
-              </div>
-              <div className="message-info">
-                <span className="message-sender">David Brown</span>
-                <span className="message-time">5:30 PM</span>
-              </div>
-            </div>
-          </div>
         </div>
 
-        <div className="message-input-container">
-          <form onSubmit={handleSendMessage} className="message-form">
-            <div className="input-wrapper">
-              <input
-                type="text"
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                placeholder="Type your message here..."
-                className="message-input"
-              />
-              <button type="button" className="attachment-btn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66L9.41 16.4a2 2 0 0 1-2.83-2.83l8.49-8.4"/>
-                </svg>
-              </button>
-            </div>
-            <button type="submit" className="send-button">
-              Send
-            </button>
-          </form>
-        </div>
+        <MessageInput
+          newMessage={newMessage}
+          setNewMessage={setNewMessage}
+          onSendMessage={handleSendMessage}
+        />
       </div>
     </div>
   );
