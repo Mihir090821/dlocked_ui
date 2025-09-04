@@ -1,0 +1,65 @@
+
+/* Upload container (clickable area) */
+.auth-upload-area {
+  width: 80px;
+  height: 80px;
+  border: 2px dashed var(--auth-input-border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--auth-input-bg);
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.06s ease;
+}
+
+.auth-upload-area:hover {
+  border-color: var(--input-border-focus, #481FFF);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.auth-upload-area:active {
+  transform: scale(0.98);
+}
+
+/* Error state */
+.auth-upload-error {
+  border-color: var(--input-border-error, #ef4444);
+}
+
+/* Upload icon (when no image yet) */
+.auth-upload-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-upload-icon {
+  width: 80px;
+  height: 80px;
+  /* opacity: 0.9; */
+}
+
+/* Preview (when image is selected) */
+.auth-upload-preview {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.auth-upload-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.auth-illustration-img{
+  max-width: 320px !important;
+}
+
+.auth-illustration-register{
+  max-width: 370px !important;
+  height: 610px !important;
+}

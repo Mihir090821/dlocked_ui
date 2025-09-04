@@ -2,12 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { CloudUpload as UploadIcon } from '@mui/icons-material';
-// import { ReactComponent as UploadIcon } from "../../assets/images/login/upload.svg";
 import { useAuth } from '../../utils/hooks/useAuth';
 import { useTheme } from '../../utils/hooks/useTheme';
 import onboardingIllustration from '../../assets/images/login/onboarding.png'; // You'll need this image
 import { PROJECT_NAME } from '../../utils/globals/KRM_GLOBAL_VARIABLES';
+import "/src/assets/css/onboarding.css";
 
 // Validation Schema
 const validationSchema = Yup.object({
@@ -115,7 +114,7 @@ const UserOnboarding = () => {
       <div className="auth-card">
         <div className="auth-illustration">
           <div className="auth-illustration-gradient">
-            <img src={onboardingIllustration} alt="Onboarding Illustration" />
+            <img className="auth-illustration-img" src={onboardingIllustration} alt="Onboarding Illustration" />
           </div>
         </div>
 
@@ -150,7 +149,7 @@ const UserOnboarding = () => {
                       </div>
                     ) : (
                       <div className="auth-upload-content">
-                        <UploadIcon className="auth-upload-icon" />
+                        <img src="/src/assets/images/login/upload.svg" className="auth-upload-icon" alt="Upload" />
                       </div>
                     )}
                   </div>

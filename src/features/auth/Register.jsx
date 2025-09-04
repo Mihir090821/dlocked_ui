@@ -95,7 +95,7 @@ const Register = () => {
       <div className="auth-card">
         <div className="auth-illustration">
           <div className="auth-illustration-gradient">
-            <img className="auth-illustration-img" src={loginIllustration} alt="Team Illustration" />
+            <img className="auth-illustration-register" src={loginIllustration} alt="Team Illustration" />
           </div>
         </div>
 
