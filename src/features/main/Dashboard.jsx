@@ -40,9 +40,17 @@ const Dashboard = () => {
       id: 'pubg-mobile',
       name: 'PUBG Mobile',
       description: 'Community for PUBG Mobile Discussions and Updates',
-      members: '7k+',
+      members: '206+',
       icon: profileImage,
       gradient: 'linear-gradient(135deg, #f39c12 0%, #ff9500 100%)',
+      headerImage: profileImage
+    },{
+      id: 'eleven-labs',
+      name: 'Eleven Labs',
+      description: 'Community for PUBG Mobile Discussions and Updates',
+      members: '7k+',
+      icon: profileImage,
+      gradient: 'linear-gradient(135deg, #6c9c9dff 0%, #503b55ff 100%)',
       headerImage: profileImage
     }
   ];

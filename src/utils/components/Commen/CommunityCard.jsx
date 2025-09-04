@@ -8,18 +8,18 @@ const CommunityCard = ({ community }) => {
         className="community-header"
         style={{ background: community.gradient }}
       >
-        <div className="community-icon-container">
+      </div>
           <img 
             src={community.icon} 
             alt={community.name}
             className="community-icon-large"
           />
-        </div>
-      </div>
       
       <div className="community-content">
         <h3 className="community-name">{community.name}</h3>
         <p className="community-description">{community.description}</p>
+
+        <div className="community-card-separator"></div>
         
         <div className="community-footer">
           <div className="member-info">

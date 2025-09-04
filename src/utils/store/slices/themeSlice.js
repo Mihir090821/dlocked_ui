@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isDarkMode: false, // Default to dark based on your Figma designs
+  isDarkMode: true, // Default to dark based on your Figma designs
   primaryColor: "#6C5CE7",
   accentColor: "#00CEC9",
   fontSize: "medium", // small, medium, large
