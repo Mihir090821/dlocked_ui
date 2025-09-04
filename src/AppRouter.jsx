@@ -17,6 +17,7 @@ import UserOnboarding from './features/auth/UserOnboarding';
 import Dashboard from './features/main/Dashboard';
 import Chats from './features/chat/Chats';
 import NotFound from './utils/components/Errors/NotFound';
+import ResetPassword from './features/auth/ResetPassword';
 
 
 const AppRouter = () => {
@@ -51,6 +52,7 @@ const AppRouter = () => {
         />
 
 
+        
         <Route
           path="/verify-email"
           element={
@@ -64,6 +66,15 @@ const AppRouter = () => {
           element={
             // <ProtectedRoute requireOnboarding={false}>
             <UserOnboarding />
+            // </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/reset-password"
+          element={
+            // <ProtectedRoute requireOnboarding={false}>
+            <ResetPassword />
             // </ProtectedRoute>
           }
         />
