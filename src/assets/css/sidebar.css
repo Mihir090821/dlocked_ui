@@ -281,7 +281,3 @@
 [data-theme="dark"] .community-avatar {
   border-color: rgba(255, 255, 255, 0.1);
 }
-
-[data-theme="light"] .sidebar {
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
-}

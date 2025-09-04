@@ -7,6 +7,7 @@ import { useAuth } from '../../../utils/hooks/useAuth';
 import UserAvatar from '../../../utils/components/Commen/UserAvatar';
 
 import profileImage from '../../../assets/images/user/user.png';
+import SearchBar from '../../../utils/components/Commen/Search';
 
 
 const Header = ({ onToggleSidebar }) => {
@@ -23,13 +24,14 @@ const Header = ({ onToggleSidebar }) => {
 
       {/* Right Side - Search with External Icon, Separator, Other Elements */}
       <div className="header-right">
-        <div className="search-container">
+        {/* <div className="search-container">
           <input
             type="text"
             placeholder="Search for communities and opportunities"
             className="search-input"
           />
-        </div>
+        </div> */}
+        <SearchBar  placeholder="Search for communities and opportunities"/>
 
         <button className="search-btn">
           <SearchIcon />
