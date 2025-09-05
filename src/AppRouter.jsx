@@ -18,6 +18,7 @@ import Dashboard from './features/main/Dashboard';
 import Chats from './features/chat/Chats';
 import NotFound from './utils/components/Errors/NotFound';
 import ResetPassword from './features/auth/ResetPassword';
+import AmongUsContent from './features/community/AmongUsContent';
 
 
 const AppRouter = () => {
@@ -52,7 +53,7 @@ const AppRouter = () => {
         />
 
 
-        
+
         <Route
           path="/verify-email"
           element={
@@ -69,7 +70,7 @@ const AppRouter = () => {
             // </ProtectedRoute>
           }
         />
-        
+
         <Route
           path="/reset-password"
           element={
@@ -84,7 +85,9 @@ const AppRouter = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/chats" element={<Chats />} />
           <Route path="/chats/:chatId" element={<Chats />} />
+          <Route path="/amongus" element={<AmongUsContent />} />
         </Route>
+
         {/* <Route
           path="/dashboard"
           element={
