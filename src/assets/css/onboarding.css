@@ -1,4 +1,3 @@
-
 /* Upload container (clickable area) */
 .auth-upload-area {
   width: 80px;
@@ -15,7 +14,7 @@
 
 .auth-upload-area:hover {
   border-color: var(--input-border-focus, #481FFF);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .auth-upload-area:active {
@@ -55,14 +54,82 @@
   display: block;
 }
 
-.auth-illustration-img{
-  max-width: 320px !important;
+.auth-illustration-img {
+  max-width: 335px !important;
 }
 
-.auth-illustration-register{
+.auth-illustration-register {
   max-width: 370px !important;
-  height: 610px !important;
+  height: 560px !important;
 }
-.auth-resend-info{
-    margin-bottom: 0 !important;
+
+.auth-resend-info {
+  margin-bottom: 0 !important;
+}
+
+.auth-toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.auth-toggle-btn {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  background: var(--input-bg);
+  text-align: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+/* ✅ Selected State */
+input[type="radio"]:checked+.auth-toggle-btn {
+  border: var(--Spacing-Border-Width-50, 2px) solid var(--Color-Primary-500, #481FFF);
+  color: var(--Color-Primary-500, #481FFF);
+}
+
+/* Dark Mode Selected */
+:root[data-theme="dark"] input[type="radio"]:checked+.auth-toggle-btn {
+  background: #080127;
+}
+
+/* Light Mode Selected */
+:root[data-theme="light"] input[type="radio"]:checked+.auth-toggle-btn {
+  background: #DAD2FF;
+}
+.cropper-container {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.cropper-wrapper {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  background: #111;
+}
+
+.cropper-controls {
+  margin-top: 20px;
+  width: 300px;
+  text-align: center;
+}
+
+.cropper-buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
 }

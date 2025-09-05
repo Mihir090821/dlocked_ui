@@ -233,18 +233,19 @@ const Register = () => {
                   </span>
                 </div>
 
-                {/* Terms and Privacy Policy Disclaimer */}
-                <div className="auth-terms">
-                  By creating an account, you agree to the{' '}
-                  <span className="auth-terms-link">Terms of Service</span>
-                  {' '}and{' '}
-                  <span className="auth-terms-link">Privacy Policy</span>
-                  {' '}of project<span className="highlight">(z)</span>.
-                </div>
+
               </Form>
             )}
           </Formik>
         </div>
+      </div>
+
+      {/* ✅ Fixed Footer Disclaimer */}
+      <div className="auth-terms">
+        By creating an account, you agree to the{" "}
+        <span className="auth-terms-link">Terms of Service</span> and{" "} <br />
+        <span className="auth-terms-link">Privacy Policy</span> of project
+        <span className="highlight">(z)</span>.
       </div>
     </div>
   );

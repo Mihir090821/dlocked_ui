@@ -1,99 +1,100 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import { useAuth } from '../../utils/hooks/useAuth';
-import { useTheme } from '../../utils/hooks/useTheme';
-import onboardingIllustration from '../../assets/images/login/onboarding.png'; // You'll need this image
-import { PROJECT_NAME } from '../../utils/globals/KRM_GLOBAL_VARIABLES';
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useAuth } from "../../utils/hooks/useAuth";
+import { useTheme } from "../../utils/hooks/useTheme";
+import onboardingIllustration from "../../assets/images/login/onboarding.png";
+import uploadIcon from "/src/assets/images/login/upload.svg"; // ✅ Import icon
+import { PROJECT_NAME } from "../../utils/globals/KRM_GLOBAL_VARIABLES";
 import "/src/assets/css/onboarding.css";
+import ImageCropper from "/src/features/auth/ImageCropper.jsx";
 
-// Validation Schema
+// ✅ Validation Schema
 const validationSchema = Yup.object({
+  accountType: Yup.string().required("Please select Individual or Company"),
   name: Yup.string()
-    .min(2, 'Name must be at least 2 characters')
-    .max(50, 'Name must be less than 50 characters')
-    .required('Name is required'),
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name must be less than 50 characters")
+    .required("Name is required"),
   username: Yup.string()
-    .min(3, 'Username must be at least 3 characters')
-    .max(30, 'Username must be less than 30 characters')
-    .matches(/^[a-zA-Z0-9_]+$/, 'Username can only contain letters, numbers, and underscores')
-    .required('Username is required'),
+    .min(3, "Username must be at least 3 characters")
+    .max(30, "Username must be less than 30 characters")
+    .matches(/^[a-zA-Z0-9_]+$/, "Only letters, numbers, underscores allowed")
+    .required("Username is required"),
   profileImage: Yup.mixed()
     .nullable()
-    .test('fileSize', 'File size is too large (max 5MB)', (value) => {
+    .test("fileSize", "File size is too large (max 5MB)", (value) => {
       if (!value) return true;
-      return value.size <= 5 * 1024 * 1024; // 5MB
+      return value.size <= 5 * 1024 * 1024;
     })
-    .test('fileFormat', 'Unsupported file format', (value) => {
+    .test("fileFormat", "Unsupported file format", (value) => {
       if (!value) return true;
-      return ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'].includes(value.type);
-    })
+      return ["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(
+        value.type
+      );
+    }),
 });
 
 const UserOnboarding = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const { updateProfile, isLoading, error, clearError } = useAuth();
   const { isDarkMode } = useTheme();
+
   const fileInputRef = useRef(null);
+
+  // ✅ Local states
   const [imagePreview, setImagePreview] = useState(null);
+  const [showCropper, setShowCropper] = useState(false);
+  const [rawImage, setRawImage] = useState(null);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+    document.documentElement.setAttribute(
+      "data-theme",
+      isDarkMode ? "dark" : "light"
+    );
+  }, [isDarkMode]);
 
-    // Check if user is coming from email verification
-    // const userEmail = location.state?.email || localStorage.getItem('verificationEmail');
-    // if (!userEmail) {
-    //   // If no email context, redirect to login
-    //   navigate('/login');
-    // }
-  }, [isDarkMode, location.state, navigate]);
+  // ✅ Handle Image Upload → open cropper
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setRawImage(e.target.result); // raw uploaded image
+        setShowCropper(true); // open cropper
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
+  // ✅ Submit handler
   const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
     try {
       if (error) clearError();
 
-      // Create FormData for file upload
       const formData = new FormData();
-      formData.append('name', values.name);
-      formData.append('username', values.username);
+      formData.append("name", values.name);
+      formData.append("username", values.username);
 
       if (values.profileImage) {
-        formData.append('profileImage', values.profileImage);
+        formData.append("profileImage", values.profileImage);
       }
 
       const result = await updateProfile(formData);
 
       if (result.success) {
-        // Clear stored email and redirect to dashboard
-        localStorage.removeItem('verificationEmail');
-        navigate('/dashboard');
-      } else {
-        if (result.fieldErrors) {
-          Object.keys(result.fieldErrors).forEach(field => {
-            setFieldError(field, result.fieldErrors[field]);
-          });
-        }
+        localStorage.removeItem("verificationEmail");
+        navigate("/dashboard");
+      } else if (result.fieldErrors) {
+        Object.keys(result.fieldErrors).forEach((field) => {
+          setFieldError(field, result.fieldErrors[field]);
+        });
       }
     } catch (err) {
-      console.error('Profile update error:', err);
+      console.error("Profile update error:", err);
     } finally {
       setSubmitting(false);
-    }
-  };
-
-  const handleImageUpload = (event, setFieldValue) => {
-    const file = event.target.files[0];
-    if (file) {
-      setFieldValue('profileImage', file);
-
-      // Create image preview
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImagePreview(e.target.result);
-      };
-      reader.readAsDataURL(file);
     }
   };
 
@@ -102,9 +103,10 @@ const UserOnboarding = () => {
   };
 
   const initialValues = {
-    name: '',
-    username: '',
-    profileImage: null
+    accountType: "individual",
+    name: "",
+    username: "",
+    profileImage: null,
   };
 
   return (
@@ -112,58 +114,115 @@ const UserOnboarding = () => {
       <div className="auth-brand">{PROJECT_NAME}</div>
 
       <div className="auth-card">
+        {/* Illustration */}
         <div className="auth-illustration">
           <div className="auth-illustration-gradient">
-            <img className="auth-illustration-img" src={onboardingIllustration} alt="Onboarding Illustration" />
+            <img
+              className="auth-illustration-img"
+              src={onboardingIllustration}
+              alt="Onboarding Illustration"
+            />
           </div>
         </div>
 
+        {/* Form */}
         <div className="auth-form-section">
           <div className="auth-header">
             <h1 className="auth-title">Please enter your details</h1>
           </div>
 
-          {error && (
-            <div className="auth-error">
-              {error}
-            </div>
-          )}
+          {error && <div className="auth-error">{error}</div>}
 
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
-            {({ isSubmitting, touched, errors, values, setFieldValue }) => (
+            {({ isSubmitting, touched, errors, setFieldValue }) => (
               <Form className="auth-form">
-                {/* Image Upload */}
+                {/* Toggle */}
+                <div className="auth-toggle">
+                  <Field
+                    type="radio"
+                    id="individual"
+                    name="accountType"
+                    value="individual"
+                  />
+                  <label htmlFor="individual" className="auth-toggle-btn">
+                    Individual
+                  </label>
+
+                  <Field
+                    type="radio"
+                    id="company"
+                    name="accountType"
+                    value="company"
+                  />
+                  <label htmlFor="company" className="auth-toggle-btn">
+                    Company
+                  </label>
+                </div>
+                <ErrorMessage
+                  name="accountType"
+                  component="div"
+                  className="auth-field-error"
+                />
+
+                {/* Upload Image */}
                 <div className="auth-field">
                   <label>Upload Image</label>
                   <div
-                    className={`auth-upload-area ${touched.profileImage && errors.profileImage ? 'auth-upload-error' : ''}`}
+                    className={`auth-upload-area ${
+                      touched.profileImage && errors.profileImage
+                        ? "auth-upload-error"
+                        : ""
+                    }`}
                     onClick={triggerFileUpload}
                   >
                     {imagePreview ? (
-                      <div className="auth-upload-preview">
-                        <img src={imagePreview} alt="Profile Preview" />
-                      </div>
+                      <img
+                        src={imagePreview}
+                        alt="Preview"
+                        className="auth-upload-preview"
+                      />
                     ) : (
-                      <div className="auth-upload-content">
-                        <img src="/src/assets/images/login/upload.svg" className="auth-upload-icon" alt="Upload" />
-                      </div>
+                      <img
+                        src={uploadIcon}
+                        alt="Upload"
+                        className="auth-upload-icon"
+                      />
                     )}
                   </div>
+
                   <input
                     ref={fileInputRef}
                     type="file"
                     accept="image/*"
-                    style={{ display: 'none' }}
-                    onChange={(e) => handleImageUpload(e, setFieldValue)}
+                    style={{ display: "none" }}
+                    onChange={handleImageUpload}
                   />
-                  <ErrorMessage name="profileImage" component="div" className="auth-field-error" />
+
+                  <ErrorMessage
+                    name="profileImage"
+                    component="div"
+                    className="auth-field-error"
+                  />
                 </div>
 
-                {/* Name Field */}
+                {/* Cropper Modal */}
+                {showCropper && (
+                  <ImageCropper
+                    image={rawImage}
+                    onCancel={() => setShowCropper(false)}
+                    onComplete={(croppedFile) => {
+                      setImagePreview(URL.createObjectURL(croppedFile));
+                      setFieldValue("profileImage", croppedFile);
+                      setShowCropper(false);
+                    }}
+                  />
+                )}
+
+                {/* Name */}
                 <div className="auth-field">
                   <label htmlFor="name">Your Name</label>
                   <Field
@@ -171,15 +230,18 @@ const UserOnboarding = () => {
                     name="name"
                     type="text"
                     placeholder="Enter your name"
-                    className={`auth-input ${touched.name && errors.name ? 'auth-input-error' : ''}`}
-                    onChange={(e) => {
-                      if (error) clearError();
-                    }}
+                    className={`auth-input ${
+                      touched.name && errors.name ? "auth-input-error" : ""
+                    }`}
                   />
-                  <ErrorMessage name="name" component="div" className="auth-field-error" />
+                  <ErrorMessage
+                    name="name"
+                    component="div"
+                    className="auth-field-error"
+                  />
                 </div>
 
-                {/* Username Field */}
+                {/* Username */}
                 <div className="auth-field">
                   <label htmlFor="username">Username</label>
                   <Field
@@ -187,24 +249,34 @@ const UserOnboarding = () => {
                     name="username"
                     type="text"
                     placeholder="Choose your username"
-                    className={`auth-input ${touched.username && errors.username ? 'auth-input-error' : ''}`}
+                    className={`auth-input ${
+                      touched.username && errors.username
+                        ? "auth-input-error"
+                        : ""
+                    }`}
                     onChange={(e) => {
-                      // Convert to lowercase and remove spaces
-                      const value = e.target.value.toLowerCase().replace(/\s/g, '');
-                      setFieldValue('username', value);
-
-                      if (error) clearError();
+                      const value = e.target.value
+                        .toLowerCase()
+                        .replace(/\s/g, "");
+                      setFieldValue("username", value);
                     }}
                   />
-                  <ErrorMessage name="username" component="div" className="auth-field-error" />
+                  <ErrorMessage
+                    name="username"
+                    component="div"
+                    className="auth-field-error"
+                  />
                 </div>
 
+                {/* Submit */}
                 <button
                   type="submit"
                   className="auth-btn-signin"
                   disabled={isLoading || isSubmitting}
                 >
-                  {(isLoading || isSubmitting) ? 'Submitting...' : 'Submit Details'}
+                  {isLoading || isSubmitting
+                    ? "Submitting..."
+                    : "Submit Details"}
                 </button>
               </Form>
             )}

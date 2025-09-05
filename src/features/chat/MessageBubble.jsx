@@ -1,4 +1,4 @@
-// components/MessageBubble.jsx
+// Updated MessageBubble.jsx - Alternative structure
 import React from 'react';
 
 const MessageBubble = ({ message, showDate }) => {
@@ -6,7 +6,9 @@ const MessageBubble = ({ message, showDate }) => {
     <React.Fragment>
       {showDate && (
         <div className="date-divider">
-          <span>{message.date}</span>
+          <div className="date-line"></div>
+          <span className="date-text">{message.date}</span>
+          <div className="date-line"></div>
         </div>
       )}
       <div className={`message ${message.isMe ? 'message-sent' : 'message-received'}`}>
