@@ -1,4 +1,33 @@
-:root,
+:root {
+  --bg-primary: #ffffff;
+  --card-bg: rgba(255, 255, 255, 0.6);
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a5568;
+  --text-muted: #6b7280;
+  --input-bg: rgba(255, 255, 255, 0.8);
+  --input-border: rgba(0, 0, 0, 0.15);
+  --input-border-focus: #481fff;
+  --input-border-error: #ef4444;
+  --input-text: #1a1a1a;
+  --input-placeholder: #9ca3af;
+  --btn-primary-bg: #481fff;
+  --btn-primary-text: #ffffff;
+  --btn-google-bg: #ffffff;
+  --btn-google-text: #1a1a1a;
+  --divider-color: rgba(0, 0, 0, 0.15);
+  --error-bg: rgba(239, 68, 68, 0.1);
+  --error-text: #dc2626;
+  --link-color: #481fff;
+  --link-hover: #5b4bd6;
+  --auth-card-bg: rgba(255, 255, 255, 0.6);
+  --auth-card-border: rgba(0, 0, 0, 0.1);
+  --background-image: url("../../assets/images/login/auth-bg-light.png");
+  font-family: "Switzer Variable";
+  --btn-signin-bg: #0d0d0d;
+  --btn-signin-text: #ffffff;
+}
+
+/* Dark theme overrides */
 :root[data-theme="dark"] {
   --bg-primary: #0b0f1a;
   --card-bg: rgba(13, 13, 13, 0.6);
@@ -7,57 +36,22 @@
   --text-muted: #9ca3af;
   --input-bg: rgba(255, 255, 255, 0.05);
   --input-border: rgba(255, 255, 255, 0.2);
-  --input-border-focus: #481FFF;
-  --input-border-error: #ef4444;
   --input-text: #ffffff;
   --input-placeholder: #888;
   --btn-primary-bg: #ffffff;
   --btn-primary-text: #000000;
-  --btn-google-bg: #481FFF;
+  --btn-google-bg: #481fff;
   --btn-google-text: #ffffff;
   --divider-color: rgba(255, 255, 255, 0.2);
-  --error-bg: rgba(239, 68, 68, 0.1);
   --error-text: #f87171;
-  --link-color: #481FFF;
-  --link-hover: #5b4bd6;
-  --auth-card-bg: rgba(13, 13, 13, 0.60);
+  --auth-card-bg: rgba(13, 13, 13, 0.6);
   --auth-card-border: #333;
   --background-image: url("../../assets/images/login/auth-bg-dark.png");
-  font-family: var("Switzer Variable");
   --btn-signin-bg: #ffffff;
-  --btn-signin-text: #0D0D0D;
+  --btn-signin-text: #0d0d0d;
 }
 
-/* Light mode sign-in button */
-
-:root[data-theme="light"] {
-  --bg-primary: #ffffff;
-  --card-bg: rgba(255, 255, 255, 0.6);
-  --text-primary: #1a1a1a;
-  --text-secondary: #4a5568;
-  --text-muted: #6b7280;
-  --input-bg: rgba(255, 255, 255, 0.8);
-  --input-border: rgba(0, 0, 0, 0.15);
-  --input-border-focus: #481FFF;
-  --input-border-error: #ef4444;
-  --input-text: #1a1a1a;
-  --input-placeholder: #9ca3af;
-  --btn-primary-bg: #481FFF;
-  --btn-primary-text: #ffffff;
-  --btn-google-bg: #ffffff;
-  --btn-google-text: #1a1a1a;
-  --divider-color: rgba(0, 0, 0, 0.15);
-  --error-bg: rgba(239, 68, 68, 0.1);
-  --error-text: #dc2626;
-  --link-color: #481FFF;
-  --link-hover: #5b4bd6;
-  --auth-card-bg: rgba(255, 255, 255, 0.60);
-  --auth-card-border: rgba(0, 0, 0, 0.1);
-  --background-image: url("../../assets/images/login/auth-bg-light.png");
-  font-family: var("Switzer Variable");
-  --btn-signin-bg: #0D0D0D;
-  --btn-signin-text: #ffffff;
-}
+/* Rest of your CSS remains exactly the same... */
 
 /* Theme toggle button (optional) */
 .theme-toggle {
@@ -104,7 +98,7 @@
 }
 
 .auth-brand .highlight {
-  color: #481FFF;
+  color: #481fff;
 }
 
 /* Card */
@@ -135,9 +129,8 @@
   width: 100%;
   max-width: 340px;
   border-radius: 12px;
-  background-color: #DAD2FF;
+  background-color: #dad2ff;
 }
-
 
 /* Form Section */
 .auth-form-section {
@@ -159,7 +152,7 @@
 }
 
 .auth-title .highlight {
-  color: #481FFF;
+  color: #481fff;
 }
 
 /* Inputs */
@@ -273,8 +266,8 @@
   font-weight: 600;
   border: 1px solid var(--input-border);
   border-radius: 8px;
-  background: #481FFF;
-  color: #FFFFFF;
+  background: #481fff;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -367,7 +360,6 @@
     top: 20px;
     left: 20px;
   }
-
 }
 
 /* Terms and Privacy Policy */
@@ -388,7 +380,7 @@
   cursor: pointer;
   text-decoration: underline;
   transition: color 0.3s ease;
-  color: #EFEFEF;
+  color: #efefef;
 }
 
 .auth-terms-link:hover {

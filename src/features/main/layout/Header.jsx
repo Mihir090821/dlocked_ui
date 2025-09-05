@@ -2,8 +2,12 @@ import React from 'react';
 import {
   Search as SearchIcon,
   Notifications as NotificationsIcon,
+  
 } from '@mui/icons-material';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { useAuth } from '../../../utils/hooks/useAuth';
+import { useTheme } from '../../../utils/hooks/useTheme';
 import UserAvatar from '../../../utils/components/Commen/UserAvatar';
 
 import profileImage from '../../../assets/images/user/user.png';
@@ -12,7 +16,9 @@ import SearchBar from '../../../utils/components/Commen/Search';
 
 const Header = ({ onToggleSidebar }) => {
   const { user } = useAuth();
+  const {toggleTheme,isDarkMode}=useTheme();
 
+  
   return (
     <header className="app-header">
       {/* Left Side - Only Logo */}
@@ -40,8 +46,12 @@ const Header = ({ onToggleSidebar }) => {
         {/* Vertical Separator Line */}
         <div className="header-separator"></div>
 
+        <button className="notification-btn" onClick={toggleTheme}>
+          {isDarkMode  ? <LightModeIcon /> : <DarkModeIcon/>}
+        </button>
+
         <button className="notification-btn">
-          <NotificationsIcon />
+          {<NotificationsIcon />}
         </button>
 
         <button className="create-community-btn">
