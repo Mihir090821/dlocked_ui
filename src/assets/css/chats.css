@@ -73,7 +73,7 @@
   --chat-card-bg: rgba(255, 255, 255, 0.95);
   --chat-conversation-bg: transparent;
   --chat-conversation-hover: rgba(175, 184, 193, 0.2);
-  --chat-conversation-active: #2a2e33;
+  --chat-conversation-active: #EFEFEF;
   /* --chat-conversation-active-border: rgba(99, 102, 241, 0.25); */
 
   /* Message Bubbles - CORRECTED COLORS */
